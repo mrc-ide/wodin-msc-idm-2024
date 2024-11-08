@@ -15,18 +15,18 @@ deriv(I_m_h) <- FOI_m_h*S_m_h - recovery_2c*I_m_h
 
 ##Initial conditions
 
-initial(S_w_l) <- 100000*(1-propHighRisk)*0.999
-initial(S_w_h) <- 100000*propHighRisk*0.999
+initial(S_w_l) <- 100000*(1-fracHighRisk)*0.999
+initial(S_w_h) <- 100000*fracHighRisk*0.999
 
-initial(I_w_l) <- 100000*(1-propHighRisk)*0.001
-initial(I_w_h) <- 100000*propHighRisk*0.001
+initial(I_w_l) <- 100000*(1-fracHighRisk)*0.001
+initial(I_w_h) <- 100000*fracHighRisk*0.001
 
 
-initial(S_m_l) <- 100000*(1-propHighRisk)*0.999
-initial(S_m_h) <- 100000*propHighRisk*0.999
+initial(S_m_l) <- 100000*(1-fracHighRisk)*0.999
+initial(S_m_h) <- 100000*fracHighRisk*0.999
 
-initial(I_m_l) <- 100000*(1-propHighRisk)*0.001
-initial(I_m_h) <- 100000*propHighRisk*0.001
+initial(I_m_l) <- 100000*(1-fracHighRisk)*0.001
+initial(I_m_h) <- 100000*fracHighRisk*0.001
 
 
 ##Other equations
@@ -37,13 +37,13 @@ N_w <- S_w_l+I_w_l+S_w_h+I_w_h
 N_m <- S_m_l+I_m_l+S_m_h+I_m_h
 N_all <- N_w+N_m
 
-pcr_2c_l=pcr_2c/(RatioHL*propHighRisk+(1-propHighRisk))
+pcr_2c_l=pcr_2c/(RatioHL*fracHighRisk+(1-fracHighRisk))
 pcr_2c_h=pcr_2c_l*RatioHL
 
-mix_random_ll=pcr_2c_l*(1-propHighRisk)/pcr_2c
-mix_random_lh=pcr_2c_h*propHighRisk/pcr_2c
-mix_random_hl=pcr_2c_l*(1-propHighRisk)/pcr_2c
-mix_random_hh=pcr_2c_h*propHighRisk/pcr_2c
+mix_random_ll=pcr_2c_l*(1-fracHighRisk)/pcr_2c
+mix_random_lh=pcr_2c_h*fracHighRisk/pcr_2c
+mix_random_hl=pcr_2c_l*(1-fracHighRisk)/pcr_2c
+mix_random_hh=pcr_2c_h*fracHighRisk/pcr_2c
 
 mix_assort_ll=1
 mix_assort_lh=0
@@ -65,14 +65,14 @@ FOI_m_h=betaWM_2c*pcr_2c_h*(mix_final_hl*(I_w_l/(S_w_l+I_w_l))+(mix_final_hh*(I_
 
 ##Parameter values
 
-propHighRisk <-user(0.2)		#prop high risk among all Fem and all mal
-RatioHL <-user(25)		# Ration of partner change rate in the HR group over in the LR group
-pcr_2c <-user(2)		#partner change rate
-Epsilon <-user(1)		# risk assortativity parameter
+fracHighRisk <-user(0.2)		# Fraction of high risk among all women and all men
+RatioHL <-user(25)		# Ratio of partner change rate in the HR group over in the LR group
+pcr_2c <-user(2)		# Partner change rate
+Epsilon <-user(1)		# Risk assortativity parameter
 
-betaMW_2c <- user(0.5)  	#per partner STI transmission probability, male to female
-betaWM_2c <- user(0.5)  	#per partner STI transmission probability, female to male
-#recovery_2c <- user(2)     #recovery rate of infection per person per year (1/mean duration in years)		
+betaMW_2c <- user(0.5)  	# per partner STI transmission probability, male to female
+betaWM_2c <- user(0.5)  	# per partner STI transmission probability, female to male
+#recovery_2c <- user(2)     # Annual recovery rate of infection per person per year (1/mean duration in years)		
 DurInf_2c <- user(0.5)     # mean duration of infectiousness in years (1/recovery rate)		
 recovery_2c<-1/DurInf_2c
 
@@ -86,5 +86,5 @@ output(prevalence_m_l) <- I_m_l/(I_m_l+S_m_l)
 output(prevalence_f_h) <- I_w_h/(I_w_h+S_w_h)
 output(prevalence_m_h) <- I_m_h/(I_m_h+S_m_h)
 output(prevalence_all) <- (I_w+I_m)/N_all
-output(cLow) <- pcr_2c/(RatioHL*propHighRisk+(1-propHighRisk))
+output(cLow) <- pcr_2c/(RatioHL*fracHighRisk+(1-fracHighRisk))
 output(cHigh) <- pcr_2c_l*RatioHL
