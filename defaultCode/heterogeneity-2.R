@@ -70,8 +70,8 @@ RatioHL <-user(25)		# Ratio of partner change rate in the HR group over in the L
 pcr_2c <-user(2)		# Partner change rate
 Epsilon <-user(1)		# Risk assortativity parameter
 
-betaMW_2c <- user(0.5)  	# per partner STI transmission probability, male to female
-betaWM_2c <- user(0.5)  	# per partner STI transmission probability, female to male
+bbetaMW_2c <- user(0.5)  	# per partner STI transmission probability, men to women
+betaWM_2c <- user(0.5)  	# per partner STI transmission probability, women to men
 #recovery_2c <- user(2)     # Annual recovery rate of infection per person per year (1/mean duration in years)		
 DurInf_2c <- user(0.5)     # mean duration of infectiousness in years (1/recovery rate)		
 recovery_2c<-1/DurInf_2c
